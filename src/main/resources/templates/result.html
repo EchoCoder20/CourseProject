@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+
+<div class="container">
+    <h2>Course List</h2>
+    <p th:if="${#lists.isEmpty(courses)}">No Course With This ID!</p>
+    <table th:if="${!#lists.isEmpty(courses)}">
+        <thead>
+        <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course:${courses}">
+            <td th:text="${course.courseId}"></td>
+            <td th:text="${course.courseName}"></td>
+            <td  th:text ="${course.isActive}?'Active':'UnActive'"></td>
+
+            <td class="action-buttons">
+                <a class="btn update" th:href="@{/update/{id}(id=${course.seq})}">Update</a>
+                <a th:href="@{/delete/{id}(id=${course.seq})}" class="btn delete">Delete Course</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <a th:href="@{/}" class="back-btn">Back</a>
+
+    <!--    <a th:href="@{/find-course}" class="back-btn">Find Course By ID</a>-->
+
+
+</div>
+
+
+</body>
+</html>
